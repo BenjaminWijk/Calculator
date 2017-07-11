@@ -41,15 +41,20 @@ public class Tokenizer {
     }
 
     private Token assignTokenType(String s) throws InputMismatchException{
+        ValidOperators validOperators = ValidOperators.getInstance();
+
         if(isValue(s)){
             return new Value(Double.parseDouble(s));
         }
-        else if(isOperator()){
-            return new Operator(s);
-        }
+        //Not a value, must be operator
         else{
-            throw new InputMismatchException();
+            Operator o = validOperators.getOperator(s);
+            if(o != null){
+                return o;
+            }
+            throw new InputMismatchException("Token is not a valid value or defined operator.");
         }
+
     }
 
     boolean isValue(String token){
@@ -61,11 +66,6 @@ public class Tokenizer {
         }
     }
 
-    boolean isOperator(){
-
-
-        return false;
-    }
 
 
 }

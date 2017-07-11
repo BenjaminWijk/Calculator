@@ -7,9 +7,11 @@ import java.util.Stack;
  */
 public class Operator implements Token {
     String string;
+    int noOfArguments;
 
-    public Operator(String string){
+    public Operator(String string, int noOfArguments){
         this.string = string;
+        this.noOfArguments = noOfArguments;
     }
 
     @Override
